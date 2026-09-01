@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<!-- saved from url=(0012)about:srcdoc -->
+<html lang="zh" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+        html,body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          /* 移除 height: 100% 限制，允许内容自然扩展 */
+          min-height: 100%;
+          /* 确保内容不被截断 */
+          overflow: visible;
+        }
+        /* 确保外层 body 不会限制内层内容 */
+        body {
+          position: relative;
+        }
+        * {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+          display: none;
+        }
+      </style>
+  </head>
+  <body>
+      <script nonce="">
+        window.onerror = function(e) {
+          // 检查是否有DOM被渲染（排除script标签）
+          const hasDom = function() {
+            // 检查body是否有子元素（排除script标签）
+            const children = Array.from(document.body.children || []);
+            const nonScriptChildren = children.filter(child => child.tagName !== 'SCRIPT');
+            if (nonScriptChildren.length > 0) {
+              return true;
+            }
+            // 检查是否有文本内容（排除空白）
+            const textContent = document.body.textContent || '';
+            const hasText = textContent.trim().length > 0;
+            // 检查是否有可见元素（通过计算样式）
+            const allElements = document.body.querySelectorAll('*');
+            for (let i = 0; i < allElements.length; i++) {
+              const el = allElements[i];
+              if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') continue;
+              const style = window.getComputedStyle(el);
+              if (style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0') {
+                return true;
+              }
+            }
+            return hasText;
+          };
+          
+          // 如果页面已经渲染出DOM，则不发送错误信息
+          if (!hasDom()) {
+            window.parent.postMessage({
+              type: 'error',
+              error: e
+            }, '*')
+          }
+        }
+        window.alert = (s) => console.log(s);
+        window.confirm = (s) => console.log(s);
+        console.log('window html', window.innerHeight, Date.now())
+        
+        function handleOnload() {
+          console.log('window.onload 触发', window.innerHeight, Date.now());
+          // 检查是否有defer脚本
+          const hasDeferScripts = document.querySelectorAll('script[defer]').length > 0;
+
+          console.log('hasDeferScripts33', hasDeferScripts);
+          
+          if (hasDeferScripts) {
+            // 如果有defer脚本，等待它们执行完成
+            console.log('hasDeferScripts11', hasDeferScripts);
+            setTimeout(function() {
+              window.parent.postMessage({
+                type: 'onload',
+              }, '*');
+            }, 1000);
+          } else {
+            console.log('hasDeferScripts22', hasDeferScripts);
+            // 没有defer脚本，直接发送
+            window.parent.postMessage({
+              type: 'onload',
+            }, '*');
+          }
+        }
+        
+        // 检查文档是否已经加载完成
+        console.log('document.readyState:', document.readyState, 'Date.now():', Date.now());
+        
+        // 立即检查，如果已经加载完成则立即执行
+        if (document.readyState === 'complete') {
+          console.log('document already loaded, executing immediately');
+          handleOnload();
+        } else {
+          // 否则等待 window.onload 事件
+          console.log('waiting for window.onload, current readyState:', document.readyState);
+          // 同时监听 load 事件（更可靠）
+          window.addEventListener('load', handleOnload);
+          // 也设置 window.onload 作为备用（兼容性）
+          if (!window.onload) {
+            window.onload = handleOnload;
+          } else {
+            // 如果已经有 onload，合并执行
+            const oldOnload = window.onload;
+            window.onload = function() {
+              if (oldOnload) oldOnload();
+              handleOnload();
+            };
+          }
+        }
+      </script>
+      
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دکتر کبری حسینی | متخصص زیبایی و تزریق ژل و بوتاکس</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gold: #c9a961;
+    --gold-light: #e8d5a3;
+    --pink: #f4c2c2;
+    --rose: #e8a0a0;
+    --dark: #1a1a1a;
+    --cream: #faf6f0;
+    --deep-rose: #b76e79;
+  }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+    line-height: 1.8;
+  }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+  
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+  nav.scrolled {
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 15px 60px;
+    box-shadow: 0 4px 30px rgba(201, 169, 97, 0.2);
+  }
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+  .logo span { color: #fff; font-weight: 300; }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d1f1f 50%, #1a1a1a 100%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(201, 169, 97, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(183, 110, 121, 0.2) 0%, transparent 50%);
+  }
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+    padding: 0 20px;
+    animation: fadeUp 1.2s ease;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: #fff;
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+  .hero h1 strong {
+    color: var(--gold);
+    font-weight: 700;
+    display: block;
+    font-size: 1.1em;
+  }
+  .hero-sub {
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .hero-btn {
+    display: inline-block;
+    padding: 16px 50px;
+    background: var(--gold);
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 2px;
+    transition: all 0.4s;
+    border: 2px solid var(--gold);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .hero-btn:hover {
+    background: transparent;
+    color: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(201, 169, 97, 0.4);
+  }
+  .floating {
+    position: absolute;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+  }
+  .floating-1 { top: 15%; left: 10%; font-size: 4rem; animation-delay: 0s; }
+  .floating-2 { top: 70%; right: 10%; font-size: 3rem; animation-delay: 2s; }
+  .floating-3 { bottom: 20%; left: 20%; font-size: 2.5rem; animation-delay: 4s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  section { padding: 100px 60px; }
+  .section-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+  .section-tag {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: block;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--dark);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .section-title strong {
+    color: var(--deep-rose);
+    font-weight: 700;
+  }
+  .divider {
+    width: 80px;
+    height: 2px;
+    background: var(--gold);
+    margin: 20px auto;
+    position: relative;
+  }
+  .divider::before {
+    content: '◆';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--cream);
+    color: var(--gold);
+    padding: 0 15px;
+    font-size: 0.8rem;
+  }
+  
+  .about {
+    background: var(--cream);
+    position: relative;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .about-image {
+    position: relative;
+  }
+  .about-image img {
+    width: 100%;
+    max-height: 650px;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+    transition: transform 0.6s;
+    background: linear-gradient(135deg, #e8e8e8, #c0c0c0);
+  }
+  .about-image:hover img { transform: scale(1.02); }
+  .about-image::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--gold);
+    z-index: -1;
+  }
+  .about-image::after {
+    content: 'دکتر کبری حسینی';
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background: var(--gold);
+    color: #1a1a1a;
+    padding: 12px 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+  .about-content h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 25px;
+    color: var(--dark);
+  }
+  .about-content h2 strong {
+    color: var(--deep-rose);
+    font-weight: 700;
+  }
+  .about-content p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+    text-align: justify;
+  }
+  .credentials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 35px;
+  }
+  .credential {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #fff;
+    border-right: 3px solid var(--gold);
+    transition: all 0.3s;
+  }
+  .credential:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+  .credential-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .credential-text {
+    font-size: 0.9rem;
+    color: var(--dark);
+    font-weight: 500;
+  }
+  
+  .services {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d1f1f 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 10% 20%, rgba(201, 169, 97, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(183, 110, 121, 0.15) 0%, transparent 40%);
+  }
+  .services .section-title { color: #fff; }
+  .services .divider::before { background: #1a1a1a; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .service-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201, 169, 97, 0.2);
+    padding: 40px 30px;
+    transition: all 0.5s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--deep-rose));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--gold);
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--gold), var(--deep-rose));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+  }
+  .service-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--gold);
+  }
+  .service-card p {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  
+  .gallery {
+    background: var(--cream);
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 1;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .gallery-item:hover img { transform: scale(1.1); }
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201, 169, 97, 0.9), rgba(183, 110, 121, 0.9));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay span {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+  .gallery-item.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  
+  .contact {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d1f1f 100%);
+    color: #fff;
+    position: relative;
+  }
+  .contact .section-title { color: #fff; }
+  .contact .divider::before { background: #1a1a1a; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .contact-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: var(--gold);
+  }
+  .contact-info p {
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 30px;
+    line-height: 1.8;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-right: 2px solid var(--gold);
+    transition: all 0.3s;
+  }
+  .contact-item:hover {
+    background: rgba(201, 169, 97, 0.1);
+    transform: translateX(-5px);
+  }
+  .contact-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .contact-text {
+    color: #fff;
+    font-size: 0.95rem;
+  }
+  .contact-text small {
+    color: var(--gold-light);
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+  }
+  .contact-form {
+    background: rgba(255,255,255,0.03);
+    padding: 40px;
+    border: 1px solid rgba(201, 169, 97, 0.3);
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--gold-light);
+    font-size: 0.9rem;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201, 169, 97, 0.3);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: rgba(201, 169, 97, 0.05);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--gold);
+    color: #1a1a1a;
+    border: none;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .submit-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(201, 169, 97, 0.4);
+  }
+  
+  footer {
+    background: #0f0f0f;
+    color: rgba(255,255,255,0.6);
+    padding: 40px 60px;
+    text-align: center;
+    border-top: 1px solid rgba(201, 169, 97, 0.2);
+  }
+  .footer-logo {
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .social-links a {
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .social-links a:hover {
+    background: var(--gold);
+    color: #1a1a1a;
+    transform: translateY(-3px);
+  }
+  .whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.8rem;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+    z-index: 999;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 10px 40px rgba(37, 211, 102, 0.7); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .modal {
+    background: linear-gradient(135deg, #fff 0%, #faf6f0 100%);
+    border-radius: 20px;
+    padding: 50px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+    animation: slideUp 0.4s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--dark);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-close:hover {
+    background: var(--deep-rose);
+    transform: rotate(90deg);
+  }
+  .modal h2 {
+    font-size: 2rem;
+    color: var(--dark);
+    margin-bottom: 10px;
+    font-weight: 300;
+  }
+  .modal h2 strong {
+    color: var(--deep-rose);
+    font-weight: 700;
+  }
+  .modal-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+  }
+  .modal .form-group {
+    margin-bottom: 20px;
+  }
+  .modal .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .modal .form-group input,
+  .modal .form-group select,
+  .modal .form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: #fff;
+    border: 1px solid #e0d5c5;
+    color: var(--dark);
+    font-family: inherit;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+  .modal .form-group input:focus,
+  .modal .form-group select:focus,
+  .modal .form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+  }
+  .modal .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .modal .submit-btn {
+    margin-top: 10px;
+  }
+  
+  .datepicker-plot-area {
+    font-family: 'Vazirmatn', sans-serif !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important;
+    border: 1px solid var(--gold) !important;
+  }
+  .datepicker-plot-area .datepicker-header {
+    background: linear-gradient(135deg, var(--gold), var(--deep-rose)) !important;
+    color: #fff !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+  .datepicker-plot-area .datepicker-day-view .table-days td.selected span {
+    background: var(--gold) !important;
+    color: #fff !important;
+  }
+  .datepicker-plot-area .datepicker-day-view .table-days td span {
+    border-radius: 50% !important;
+  }
+  
+  .success-message {
+    display: none;
+    text-align: center;
+    padding: 40px;
+  }
+  .success-message.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--gold), var(--deep-rose));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2.5rem;
+    color: #fff;
+  }
+  .success-message h3 {
+    font-size: 1.5rem;
+    color: var(--dark);
+    margin-bottom: 15px;
+  }
+  .success-message p {
+    color: #666;
+    line-height: 1.8;
+  }
+  
+  @media (max-width: 968px) {
+    nav { padding: 15px 25px; }
+    nav.scrolled { padding: 12px 25px; }
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 70%;
+      height: 100vh;
+      background: rgba(26, 26, 26, 0.98);
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+      transition: right 0.4s;
+    }
+    .nav-links.active { right: 0; }
+    .menu-toggle { display: block; z-index: 1001; }
+    section { padding: 70px 25px; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item.featured { grid-column: span 2; grid-row: span 1; }
+    .credentials { grid-template-columns: 1fr; }
+    footer { padding: 30px 25px; }
+    .modal { padding: 30px; }
+  }
+</style>
+
+
+
+<nav id="navbar" class="scrolled">
+  <div class="logo">Dr. Hosseini <span>| زیبایی</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="https://qwenlm.io/#home">خانه</a></li>
+    <li><a href="https://qwenlm.io/#about">درباره دکتر</a></li>
+    <li><a href="https://qwenlm.io/#services">خدمات</a></li>
+    <li><a href="https://qwenlm.io/#gallery">گالری</a></li>
+    <li><a href="https://qwenlm.io/#contact">تماس</a></li>
+  </ul>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+</nav>
+
+<section class="hero" id="home">
+  <div class="floating floating-1">💋</div>
+  <div class="floating floating-2">✨</div>
+  <div class="floating floating-3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">LUXURY BEAUTY CLINIC</div>
+    <h1>
+      زیبایی طبیعی شما
+      <strong>با دستان هنرمند دکتر حسینی</strong>
+    </h1>
+    <p class="hero-sub">متخصص تزریق ژل، بوتاکس و جوانسازی پوست با جدیدترین متدهای روز دنیا</p>
+    <button class="hero-btn" onclick="openBookingModal()">رزرو نوبت</button>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="section-header reveal active">
+    <span class="section-tag">About Doctor</span>
+    <h2 class="section-title">درباره <strong>دکتر کبری حسینی</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-image reveal active">
+      <img src="https://image.qwenlm.ai/public_source/51302cc4-2290-4471-bfd3-605eec1e1ae5/1443dd9f9-8aa0-4b87-bd54-a5dd819c6499.png" alt="دکتر کبری حسینی">
+    </div>
+    <div class="about-content reveal active">
+      <h2>تجربه‌ای <strong>منحصر به فرد</strong> در دنیای زیبایی</h2>
+      <p>
+        دکتر کبری حسینی، فارغ‌التحصیل رشته پزشکی با تخصص ویژه در زمینه زیبایی و جوانسازی پوست، با سال‌ها تجربه درخشان در ارائه خدمات تخصصی تزریق ژل و بوتاکس، همواره در تلاش است تا با بهره‌گیری از جدیدترین تکنیک‌ها و محصولات معتبر جهانی، زیبایی طبیعی و اصیل را به مراجعین عزیز هدیه دهد.
+      </p>
+      <p>
+        فلسفه کاری دکتر حسینی بر پایه حفظ اصالت چهره و تقویت زیبایی‌های طبیعی هر فرد استوار است. هر چهره داستانی منحصر به فرد دارد و هنر ما، روایت زیباتر این داستان است.
+      </p>
+      <div class="credentials">
+        <div class="credential">
+          <div class="credential-icon">🎓</div>
+          <div class="credential-text">دکترای پزشکی عمومی</div>
+        </div>
+        <div class="credential">
+          <div class="credential-icon">💉</div>
+          <div class="credential-text">تخصص تزریق ژل و بوتاکس</div>
+        </div>
+        <div class="credential">
+          <div class="credential-icon">✨</div>
+          <div class="credential-text">جوانسازی و لیفت صورت</div>
+        </div>
+        <div class="credential">
+          <div class="credential-icon">🏆</div>
+          <div class="credential-text">بیش از ۱۰ سال تجربه</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="section-header reveal active">
+    <span class="section-tag">Our Services</span>
+    <h2 class="section-title">خدمات <strong>تخصصی</strong> ما</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal active">
+      <div class="service-icon">💉</div>
+      <h3>تزریق بوتاکس</h3>
+      <p>رفع چین و چروک‌های پیشانی، خط اخم و خطوط دور چشم با استفاده از برندهای معتبر اروپایی و آمریکایی. نتایج طبیعی و ماندگار.</p>
+    </div>
+    <div class="service-card reveal active">
+      <div class="service-icon">💋</div>
+      <h3>تزریق ژل لب</h3>
+      <p>حجم‌دهی و فرم‌دهی لب‌ها با ژل‌های هیالورونیک اسید درجه یک. ایجاد لب‌هایی طبیعی، خوش‌فرم و جذاب متناسب با چهره شما.</p>
+    </div>
+    <div class="service-card reveal active">
+      <div class="service-icon">✨</div>
+      <h3>فیلر صورت</h3>
+      <p>تزریق فیلر برای برجسته‌سازی گونه‌ها، زاویه‌سازی فک، پر کردن خط خنده و بهبود کانتور صورت با ظاهری طبیعی و زیبا.</p>
+    </div>
+    <div class="service-card reveal active">
+      <div class="service-icon">🌹</div>
+      <h3>مزوتراپی</h3>
+      <p>تزریق کوکتل‌های ویتامینه و مواد مغذی به پوست برای جوانسازی، رفع لک، بهبود کیفیت پوست و درخشندگی طبیعی.</p>
+    </div>
+    <div class="service-card reveal active">
+      <div class="service-icon">💎</div>
+      <h3>لیفت با نخ</h3>
+      <p>لیفت و سفت‌سازی پوست صورت با استفاده از نخ‌های PDO مخصوص، بدون نیاز به جراحی و با دوره نقاهت بسیار کوتاه.</p>
+    </div>
+    <div class="service-card reveal active">
+      <div class="service-icon">👁️</div>
+      <h3>تزریق دور چشم</h3>
+      <p>رفع تیرگی، پف و چروک‌های دور چشم با روش‌های تخصصی. بازگرداندن شادابی و جوانی به نگاه شما.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="section-header reveal active">
+    <span class="section-tag">Gallery</span>
+    <h2 class="section-title">گالری <strong>تصاویر</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item featured reveal active">
+      <img src="https://image.qwenlm.ai/public_source/51302cc4-2290-4471-bfd3-605eec1e1ae5/115d9918e-c413-4b0d-93db-a58217b9fd5b.png" alt="تزریق ژل لب">
+      <div class="gallery-overlay"><span>تزریق ژل لب</span></div>
+    </div>
+    <div class="gallery-item reveal active">
+      <img src="https://image.qwenlm.ai/public_source/51302cc4-2290-4471-bfd3-605eec1e1ae5/1a8d7e29a-5cc4-491d-92e5-4f7a578545eb.png" alt="تزریق بوتاکس">
+      <div class="gallery-overlay"><span>تزریق بوتاکس</span></div>
+    </div>
+    <div class="gallery-item reveal active">
+      <img src="https://image.qwenlm.ai/public_source/51302cc4-2290-4471-bfd3-605eec1e1ae5/15fc70f63-47c3-422c-8314-8a273275a0b1.png" alt="مزوتراپی">
+      <div class="gallery-overlay"><span>مزوتراپی</span></div>
+    </div>
+    <div class="gallery-item reveal active">
+      <img src="https://image.qwenlm.ai/public_source/51302cc4-2290-4471-bfd3-605eec1e1ae5/111b07b8b-11cd-4cf8-b83b-dc5e64527da8.png" alt="فیلر صورت">
+      <div class="gallery-overlay"><span>فیلر صورت</span></div>
+    </div>
+    <div class="gallery-item reveal active">
+      <img src="https://image.qwenlm.ai/public_source/51302cc4-2290-4471-bfd3-605eec1e1ae5/1e2e00501-05bb-4b99-83d0-365a38e5235f.png" alt="تزریق دور چشم">
+      <div class="gallery-overlay"><span>تزریق دور چشم</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-header reveal active">
+    <span class="section-tag">Contact Us</span>
+    <h2 class="section-title">تماس با <strong>ما</strong></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal active">
+      <h3>برای رزرو نوبت با ما در ارتباط باشید</h3>
+      <p>تیم ما آماده پاسخگویی به سوالات شما و رزرو نوبت مشاوره رایگان است. زیبایی شما، اولویت ماست.</p>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-text">
+          <small>آدرس مطب</small>
+          تهران، خیابان ولیعصر، بالاتر از میدان ونک
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-text">
+          <small>تلفن تماس</small>
+          ۰۲۱-۸۸۷۶۶۵۵
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div class="contact-text">
+          <small>موبایل و واتساپ</small>
+          ۰۹۱۲-۳۴۵-۶۷۸
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-text">
+          <small>ساعات کاری</small>
+          شنبه تا پنجشنبه: ۱۰ صبح تا ۸ شب
+        </div>
+      </div>
+    </div>
+    <form class="contact-form reveal active" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>نام و نام خانوادگی</label>
+        <input type="text" required="" placeholder="نام خود را وارد کنید">
+      </div>
+      <div class="form-group">
+        <label>شماره تماس</label>
+        <input type="tel" required="" placeholder="۰۹۱۲۳۴۵۶۷۸۹">
+      </div>
+      <div class="form-group">
+        <label>نوع خدمت مورد نظر</label>
+        <select required="">
+          <option value="">انتخاب کنید...</option>
+          <option>تزریق بوتاکس</option>
+          <option>تزریق ژل لب</option>
+          <option>فیلر صورت</option>
+          <option>مزوتراپی</option>
+          <option>لیفت با نخ</option>
+          <option>مشاوره رایگان</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>پیام شما</label>
+        <textarea placeholder="توضیحات بیشتر..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">ارسال درخواست</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Dr. Kobra Hosseini</div>
+  <p>متخصص زیبایی و جوانسازی پوست</p>
+  <div class="social-links">
+    <a href="https://qwenlm.io/#" title="اینستاگرام">📷</a>
+    <a href="https://qwenlm.io/#" title="واتساپ">💬</a>
+    <a href="https://qwenlm.io/#" title="تلگرام">️</a>
+    <a href="https://qwenlm.io/#" title="ایمیل">✉️</a>
+  </div>
+  <p style="font-size: 0.85rem; margin-top: 20px;">© ۲۰۲۶ تمامی حقوق محفوظ است | طراحی با ❤️ برای دکتر حسینی</p>
+</footer>
+
+<a href="https://wa.me/989123456789" class="whatsapp-float" title="چت در واتساپ">💬</a>
+
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeBookingModal()">×</button>
+    
+    <div id="bookingForm">
+      <h2>رزرو <strong>نوبت</strong></h2>
+      <p class="modal-subtitle">تاریخ و زمان مورد نظر خود را انتخاب کنید</p>
+      
+      <form id="appointmentForm">
+        <div class="form-group">
+          <label>نام و نام خانوادگی *</label>
+          <input type="text" id="bookName" required="" placeholder="نام کامل خود را وارد کنید">
+        </div>
+        
+        <div class="form-group">
+          <label>شماره تماس *</label>
+          <input type="tel" id="bookPhone" required="" placeholder="۰۹۱۲۳۴۵۶۷۸۹">
+        </div>
+        
+        <div class="form-group">
+          <label>نوع خدمت *</label>
+          <select id="bookService" required="">
+            <option value="">انتخاب کنید...</option>
+            <option>تزریق بوتاکس</option>
+            <option>تزریق ژل لب</option>
+            <option>فیلر صورت</option>
+            <option>مزوتراپی</option>
+            <option>لیفت با نخ</option>
+            <option>تزریق دور چشم</option>
+            <option>مشاوره رایگان</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>تاریخ مورد نظر (شمسی) *</label>
+          <input type="text" id="persianDate" required="" placeholder="تاریخ را انتخاب کنید" readonly="">
+        </div>
+        
+        <div class="form-group">
+          <label>ساعت مورد نظر *</label>
+          <select id="bookTime" required="">
+            <option value="">انتخاب کنید...</option>
+            <option>۱۰:۰۰ صبح</option>
+            <option>۱:۰۰ صبح</option>
+            <option>۱۲:۰۰ ظهر</option>
+            <option>۱۳:۰۰</option>
+            <option>۱۴:۰۰</option>
+            <option>۱۵:۰۰</option>
+            <option>۱۶:۰۰</option>
+            <option>۱۷:۰۰</option>
+            <option>۱۸:۰۰</option>
+            <option>۱۹:۰۰</option>
+            <option>۲۰:۰۰</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>توضیحات (اختیاری)</label>
+          <textarea id="bookNotes" placeholder="اگر توضیح خاصی دارید اینجا بنویسید..."></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">ثبت رزرو نوبت</button>
+      </form>
+    </div>
+    
+    <div class="success-message" id="successMessage">
+      <div class="success-icon">✓</div>
+      <h3>رزرو شما با موفقیت ثبت شد!</h3>
+      <p>اطلاعات رزرو شما به ایمیل دکتر حسینی ارسال شد.<br>به زودی با شما تماس خواهیم گرفت.</p>
+    </div>
+  </div>
+</div>
+
+<script nonce="" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script nonce="" src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
+<script nonce="" src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+
+<script nonce="">
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+  
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+  }
+  
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('active');
+    });
+  });
+  
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('active');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  
+  let datepickerInitialized = false;
+  
+  function openBookingModal() {
+    document.getElementById('bookingModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    if (!datepickerInitialized) {
+      setTimeout(() => {
+        $('#persianDate').persianDatepicker({
+          format: 'YYYY/MM/DD',
+          initialValue: false,
+          autoClose: true,
+          calendar: {
+            persian: {
+              locale: 'fa'
+            }
+          },
+          toolbox: {
+            calendarSwitch: {
+              enabled: false
+            }
+          }
+        });
+        datepickerInitialized = true;
+      }, 100);
+    }
+  }
+  
+  function closeBookingModal() {
+    document.getElementById('bookingModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+  
+  document.getElementById('bookingModal').addEventListener('click', function(e) {
+    if (e.target === this) closeBookingModal();
+  });
+  
+  document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('bookName').value;
+    const phone = document.getElementById('bookPhone').value;
+    const service = document.getElementById('bookService').value;
+    const date = document.getElementById('persianDate').value;
+    const time = document.getElementById('bookTime').value;
+    const notes = document.getElementById('bookNotes').value || 'ندارد';
+    
+    fetch('https://formsubmit.co/ajax/hosseini.masoud@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: 'درخواست رزرو نوبت جدید - سایت دکتر حسینی',
+        نام: name,
+        شماره_تماس: phone,
+        نوع_خدمت: service,
+        تاریخ_نوبت: date,
+        ساعت_نوبت: time,
+        توضیحات: notes
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('bookingForm').style.display = 'none';
+      document.getElementById('successMessage').classList.add('active');
+      
+      setTimeout(() => {
+        closeBookingModal();
+        setTimeout(() => {
+          document.getElementById('bookingForm').style.display = 'block';
+          document.getElementById('successMessage').classList.remove('active');
+          document.getElementById('appointmentForm').reset();
+        }, 500);
+      }, 3000);
+    })
+    .catch(error => {
+      alert('خطا در ارسال اطلاعات. لطفاً دوباره تلاش کنید.');
+      console.error('Error:', error);
+    });
+  });
+  
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert('درخواست شما با موفقیت ثبت شد. به زودی با شما تماس خواهیم گرفت. 🌹');
+    e.target.reset();
+  }
+</script>
+
+
+
+
+  
+  </body></html>
