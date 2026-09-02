@@ -590,19 +590,84 @@
       time: document.getElementById('bookTime').value
     };
     
-    // اینجا باید به Google Apps Script ارسال شود
-    // فعلاً فقط پیام موفقیت نشان می‌دهیم
-    document.getElementById('bookingForm').style.display = 'none';
-    document.getElementById('successMessage').classList.add('active');
-    
-    setTimeout(() => {
-      closeBookingModal();
+  <script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
+  
+  // Modal functions
+  let datepickerInitialized = false;
+  
+  function openBookingModal() {
+    document.getElementById('bookingModal').classList.add('active');
+    if (!datepickerInitialized) {
       setTimeout(() => {
-        document.getElementById('bookingForm').style.display = 'block';
-        document.getElementById('successMessage').classList.remove('active');
-        this.reset();
-      }, 500);
-    }, 3000);
+        $('#persianDate').persianDatepicker({
+          format: 'YYYY/MM/DD',
+          autoClose: true,
+          minDate: new persianDate().valueOf()
+        });
+        datepickerInitialized = true;
+      }, 100);
+    }
+  }
+  
+  function closeBookingModal() {
+    document.getElementById('bookingModal').classList.remove('active');
+  }
+  
+  // ✅ فرم با ارسال به Google Script
+  document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const data = {
+      name: document.getElementById('bookName').value,
+      phone: document.getElementById('bookPhone').value,
+      service: document.getElementById('bookService').value,
+      date: document.getElementById('persianDate').value,
+      time: document.getElementById('bookTime').value
+    };
+    
+    // 🔴 اینجا URL خود را قرار دهید
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrcfe8gF5xokIMrRuiuovjMllN_SgbhKfDCzJEQ-P60JDm8uarGz8BmHfCmWetgCbj7A/exec';
+    
+    // نمایش لودینگ
+    const submitBtn = this.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'در حال ثبت...';
+    submitBtn.disabled = true;
+    
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+      // مخفی کردن فرم و نمایش پیام موفقیت
+      document.getElementById('bookingForm').style.display = 'none';
+      document.getElementById('successMessage').classList.add('active');
+      
+      setTimeout(() => {
+        closeBookingModal();
+        setTimeout(() => {
+          document.getElementById('bookingForm').style.display = 'block';
+          document.getElementById('successMessage').classList.remove('active');
+          this.reset();
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }, 500);
+      }, 3000);
+    })
+    .catch(error => {
+      alert('خطا در ثبت نوبت. لطفاً دوباره تلاش کنید.');
+      console.error('Error:', error);
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    });
   });
 </script>
 
